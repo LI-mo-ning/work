@@ -38,12 +38,12 @@ let autoPlay = setInterval(function () {
 }, 3000)
 
 //鼠标移入停止自动播放
-slider.addEventListener('mouseover', function () {
+document.querySelector('.site-category').addEventListener('mouseover', function () {
   clearInterval(autoPlay);
 })
 
 //鼠标移出继续自动播放
-slider.addEventListener('mouseout', function () {
+document.querySelector('.site-category').addEventListener('mouseout', function () {
   autoPlay = setInterval(function () {
     next.click();
   }, 3000);
