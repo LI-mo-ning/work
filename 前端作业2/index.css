@@ -1,0 +1,339 @@
+ * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   user-select: none;
+ }
+
+ body {
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   background: #f0f2f5;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   overflow: hidden;
+ }
+
+ /* 头部 */
+ .header {
+   background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+   color: white;
+   padding: 16px 24px;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+   z-index: 10;
+ }
+
+ .header h1 {
+   font-size: 1.6rem;
+   font-weight: 500;
+   letter-spacing: 1px;
+ }
+
+ .header p {
+   font-size: 0.85rem;
+   opacity: 0.85;
+   margin-top: 6px;
+ }
+
+ /* 三栏布局 */
+ .dashboard {
+   display: flex;
+   flex: 1;
+   gap: 20px;
+   padding: 20px;
+   overflow: hidden;
+   min-height: 0;
+ }
+
+ /* 通用卡片样式 */
+ .card {
+   background: white;
+   border-radius: 20px;
+   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+   display: flex;
+   flex-direction: column;
+   overflow: hidden;
+   transition: all 0.2s ease;
+ }
+
+ .card-header {
+   padding: 16px 20px;
+   background: #fafbfc;
+   border-bottom: 2px solid #eef2f6;
+   font-weight: 600;
+   font-size: 1.2rem;
+   color: #1e466e;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   flex-wrap: wrap;
+   gap: 10px;
+ }
+
+ .card-content {
+   flex: 1;
+   overflow-y: auto;
+   padding: 16px;
+   scrollbar-width: thin;
+ }
+
+ /* 左侧工序库 */
+ .library-panel {
+   flex: 1.2;
+   min-width: 220px;
+ }
+
+ .process-templates {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+ }
+
+ .process-item {
+   background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+   border: 1px solid #e0e7ff;
+   border-radius: 14px;
+   padding: 12px 16px;
+   cursor: grab;
+   transition: all 0.2s;
+   display: flex;
+   align-items: center;
+   gap: 12px;
+   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+ }
+
+ .process-item:active {
+   cursor: grabbing;
+ }
+
+ .process-item.drag-over {
+   background: #e6f7ff;
+   border: 2px dashed #1890ff;
+   transform: scale(1.01);
+ }
+
+ .process-name {
+   font-weight: 500;
+   color: #1f2f4e;
+   flex: 1;
+ }
+
+ .process-item[draggable="true"]:hover {
+   background: #eef2ff;
+   border-color: #b9c8ff;
+   transform: translateX(4px);
+ }
+
+ /* 中间工艺列表 */
+ .processes-panel {
+   flex: 1.4;
+   min-width: 240px;
+ }
+
+ .process-list {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+ }
+
+ .process-card {
+   background: #ffffff;
+   border-radius: 16px;
+   border: 1px solid #e9ecef;
+   transition: all 0.2s;
+   overflow: hidden;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+ }
+
+ .process-card.active {
+   border-left: 5px solid #2a7de1;
+   background: #f5f9ff;
+   box-shadow: 0 4px 12px rgba(42, 125, 225, 0.15);
+ }
+
+ .process-info {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 14px 16px;
+   cursor: pointer;
+   transition: background 0.2s;
+ }
+
+ .process-info:hover {
+   background: #f8f9fc;
+ }
+
+ .process-name-text {
+   font-weight: 600;
+   color: #1f2f4e;
+   font-size: 1rem;
+ }
+
+ .process-actions {
+   display: flex;
+   gap: 8px;
+ }
+
+ .delete-process-btn {
+   background: none;
+   border: none;
+   font-size: 0.85rem;
+   cursor: pointer;
+   color: #9aa6b5;
+   transition: color 0.2s;
+   padding: 4px 8px;
+   border-radius: 30px;
+ }
+
+ .delete-process-btn:hover {
+   color: #f03e3e;
+   background: #fff0f0;
+ }
+
+ .add-process-btn {
+   background: #2a7de1;
+   color: white;
+   border: none;
+   padding: 8px 16px;
+   border-radius: 40px;
+   font-weight: 500;
+   cursor: pointer;
+   transition: 0.2s;
+   display: inline-flex;
+   align-items: center;
+   gap: 6px;
+   font-size: 0.85rem;
+ }
+
+ .add-process-btn:hover {
+   background: #1e5eb0;
+   transform: scale(0.98);
+ }
+
+ /* 右侧编辑区 */
+ .editor-panel {
+   flex: 2;
+   min-width: 300px;
+ }
+
+ .steps-container {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+   min-height: 200px;
+ }
+
+ .step-item {
+   background: white;
+   border: 1px solid #e2e8f0;
+   border-radius: 14px;
+   padding: 12px 16px;
+   display: flex;
+   align-items: center;
+   gap: 12px;
+   transition: all 0.2s;
+   cursor: grab;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+ }
+
+ .step-item:active {
+   cursor: pointer;
+ }
+
+ .step-item.drag-over {
+   border: 2px dashed #2a7de1;
+   background: #f0f7ff;
+   transform: scale(1.01);
+ }
+
+ .step-name {
+   flex: 1;
+   font-weight: 500;
+   color: #1e2f3e;
+ }
+
+ .delete-step-btn {
+   background: none;
+   border: none;
+   font-size: 0.85rem;
+   cursor: pointer;
+   color: #b9c3d0;
+   padding: 4px 8px;
+   border-radius: 30px;
+   transition: all 0.2s;
+ }
+
+ .delete-step-btn:hover {
+   color: #f03e3e;
+   background: #ffe8e8;
+ }
+
+ .empty-steps {
+   text-align: center;
+   padding: 40px 20px;
+   color: #8ba0bc;
+   background: #fafcff;
+   border-radius: 20px;
+   border: 1px dashed #cbd5e1;
+ }
+
+ /* 新增工序表单 */
+ .add-template-form {
+   margin-top: 20px;
+   display: flex;
+   gap: 10px;
+   background: #f8fafd;
+   border-radius: 40px;
+   padding: 6px;
+   border: 1px solid #e2edf7;
+ }
+
+ .add-template-form input {
+   flex: 1;
+   border: none;
+   background: transparent;
+   padding: 10px 14px;
+   outline: none;
+   font-size: 0.9rem;
+ }
+
+ .add-template-form button {
+   background: #2a7de1;
+   border: none;
+   color: white;
+   border-radius: 40px;
+   padding: 6px 18px;
+   cursor: pointer;
+   font-weight: 500;
+   transition: 0.2s;
+ }
+
+ .add-template-form button:hover {
+   background: #135baf;
+ }
+
+ /* 当前激活工艺提示 */
+ .active-process-tag {
+   background: #eef3fc;
+   padding: 8px 12px;
+   border-radius: 30px;
+   font-size: 0.8rem;
+   color: #2a7de1;
+   display: inline-block;
+ }
+
+ /* 滚动条 */
+ ::-webkit-scrollbar {
+   width: 6px;
+ }
+
+ ::-webkit-scrollbar-track {
+   background: #f1f1f1;
+   border-radius: 10px;
+ }
+
+ ::-webkit-scrollbar-thumb {
+   background: #cbd5e1;
+   border-radius: 10px;
+ }
